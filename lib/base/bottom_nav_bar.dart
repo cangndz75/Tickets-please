@@ -1,3 +1,5 @@
+import 'package:app/screens/home_screen.dart';
+import 'package:fluentui_icons/fluentui_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -9,21 +11,52 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
+  final appScreens = [ //Dört ana ekranı içerir.
+    const HomeScreen(),
+    const Center(child: Text("Search")),
+    const Center(child: Text("Tickets")),
+    const Center(child: Text("Profile")),
+  ];
+
+  int _selectedIndex = 0; //Aktif sayfa indeksini belirtir.
+
+  void _onItemTapped(int index) { //Navbar'daki ögeye tıklandığında çağrılır.
+    setState(() {
+      _selectedIndex = index; //_selectedIndex değeri güncellenir.
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+  return Scaffold(
       appBar: AppBar(
         title: const Text("My tickets"),
       ),
-      body: const Center(
-        child: Text("Ticket Info"),
-      ),
-      bottomNavigationBar: BottomNavigationBar(items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-        BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
-        BottomNavigationBarItem(icon: Icon(Icons.airplane_ticket), label: "Tickets"),
-        BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
-      ]),
+      body: appScreens[_selectedIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedIndex,
+          onTap: _onItemTapped,
+          selectedItemColor: Colors.blueGrey,
+          unselectedItemColor: const Color(0xFF526400),
+          showSelectedLabels: false,
+          items: const [
+            BottomNavigationBarItem(
+                icon: Icon(FluentSystemIcons.ic_fluent_home_regular),
+                activeIcon: Icon(FluentSystemIcons.ic_fluent_home_filled),
+                label: "Home"),
+            BottomNavigationBarItem(
+                icon: Icon(FluentSystemIcons.ic_fluent_search_regular),
+                activeIcon: Icon(FluentSystemIcons.ic_fluent_search_filled),
+                label: "Search"),
+            BottomNavigationBarItem(
+                icon: Icon(FluentSystemIcons.ic_fluent_ticket_regular),
+                activeIcon: Icon(FluentSystemIcons.ic_fluent_ticket_filled),
+                label: "Tickets"),
+            BottomNavigationBarItem(
+                icon: Icon(FluentSystemIcons.ic_fluent_person_regular),
+                activeIcon: Icon(FluentSystemIcons.ic_fluent_person_filled),
+                label: "Profile"),
+          ]),
     );
   }
 }
