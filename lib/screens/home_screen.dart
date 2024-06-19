@@ -1,4 +1,5 @@
 import 'package:app/base/res/styles/media.dart';
+import 'package:app/base/widgets/app_double_text.dart';
 import 'package:fluentui_icons/fluentui_icons.dart';
 import 'package:flutter/material.dart';
 
@@ -51,6 +52,7 @@ class HomeScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10),
                         image: const DecorationImage(
                           image: AssetImage(AppMedia.logo),
+                          fit: BoxFit.cover,
                         ),
                       ),
                     ),
@@ -60,7 +62,8 @@ class HomeScreen extends StatelessWidget {
                   height: 25,
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: const Color(0xFFB4F6FD),
@@ -79,6 +82,11 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
           ),
+          const SizedBox(
+            height: 40,
+          ),
+          const AppDoubleText(
+              bigText: 'Upcoming Flights', smallText: 'View all'),
         ],
       ),
     );
